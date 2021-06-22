@@ -8,7 +8,11 @@ class MainController extends Controller
 {
     public function indexAction()
     {
-        $this->view->render('Hello');
+        $result = $this->model->getGames();
+        $vars = [
+            'games' => $result
+        ];
+        $this->view->render('Hello', $vars);
     }
 
     public function aboutAction()

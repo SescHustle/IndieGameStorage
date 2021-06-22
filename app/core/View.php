@@ -16,8 +16,9 @@ class View
         $this->path = $route['controller'].'/'.$route['action'];
     }
 
-    public function render($title)
+    public function render($title, $vars = [])
     {
+        extract($vars);
         ob_start();
         require "../app/views/".$this->path.".php";
         $content = ob_get_clean();
