@@ -43,7 +43,7 @@ class Router
             $controllerPath = 'app\controllers\\'.ucfirst($this->params['controller'].'Controller');
             if (class_exists($controllerPath))
             {
-                $action = $this->params['action']."Action";
+                $action = $this->params['action'].'Action';
                 if(method_exists($controllerPath, $action))
                 {
                     $controller = new $controllerPath($this->params);
@@ -56,7 +56,7 @@ class Router
             }
             else
             {
-                View::errorCode(404);;
+                View::errorCode(404);
             }
         }
         else

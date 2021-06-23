@@ -10,7 +10,10 @@ class GameModel extends Model
 {
     public function gameExists($gameid)
     {
-        return ($this->db->query("SELECT EXISTS(SELECT 1 FROM games WHERE id=$gameid"));
+        $sql = "SELECT COUNT(*) FROM games WHERE id=$gameid";
+        $res = ($this->db->row($sql));
+        return $res[0]['COUNT(*)'] == '1';
+        //HARDCODED
     }
 
     public function getData($gameid)
