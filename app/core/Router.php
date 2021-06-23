@@ -56,7 +56,7 @@ class Router
             }
             else
             {
-                View::errorCode(404);
+                View::errorCode(404);;
             }
         }
         else

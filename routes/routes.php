@@ -1,5 +1,15 @@
 <?php
 return [
+    //Main controller
+    '' => [
+        'controller' => 'main',
+        'action' => 'index'
+    ],
+    'about' => [
+        'controller' => 'main',
+        'action' => 'about'
+    ],
+    //Account controller
     'login' => [
         'controller' => 'account',
         'action' => 'login'
@@ -8,12 +18,9 @@ return [
         'controller' => 'account',
         'action' => 'register'
     ],
-    '' => [
-        'controller' => 'main',
-        'action' => 'index'
-    ],
-    'about' => [
-        'controller' => 'main',
-        'action' => 'about'
+    //Game controller
+    'game/(\d+)' => [
+        'controller' => 'game',
+        'action' => 'game'
     ]
 ];

@@ -18,6 +18,7 @@ class View
 
     public function render($title, $vars = [])
     {
+        //debug($vars);
         extract($vars);
         ob_start();
         require "../app/views/".$this->path.".php";

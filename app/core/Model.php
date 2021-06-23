@@ -11,6 +11,5 @@ abstract class Model
     public function __construct()
     {
         $this->db = new Database();
-        echo 'Model is working';
     }
 }
