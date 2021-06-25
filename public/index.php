@@ -5,5 +5,5 @@ require_once '../storage/autoload.php';
 use app\core\Router;
 
 session_start();
-$r = new Router();
-$r->run();
+$router = new Router();
+$router->run();

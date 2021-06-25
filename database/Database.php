@@ -15,6 +15,12 @@ class Database
         $this->db = new PDO($dbn, $config['user'], $config['password']);
     }
 
+    /*
+     * making sql query for database
+     * @param string sql
+     * @param array params[]
+     * @return PDO::statement
+     */
     public function query($sql, $params = [])
     {
         $statement = $this->db->prepare($sql);
@@ -29,6 +35,12 @@ class Database
         return $statement;
     }
 
+    /*
+     * show query results as array
+     * @param string sql
+     * @param array params
+     * @return array
+     */
     public function row($sql, $params = [])
     {
         $result = $this->query($sql);

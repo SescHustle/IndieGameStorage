@@ -1,26 +1,30 @@
 <?php
+
+$main = 'app\controllers\MainController';
+$account = 'app\controllers\AccountController';
+$game = 'app\controllers\GameController';
 return [
     //Main controller
-    '' => [
-        'controller' => 'main',
+    '/' => [
+        'controller' => $main,
         'action' => 'index'
     ],
-    'about' => [
-        'controller' => 'main',
+    '/about' => [
+        'controller' => $main,
         'action' => 'about'
     ],
     //Account controller
-    'login' => [
-        'controller' => 'account',
+    '/login' => [
+        'controller' => $account,
         'action' => 'login'
     ],
-    'register' => [
-        'controller' => 'account',
+    '/register' => [
+        'controller' => $account,
         'action' => 'register'
     ],
     //Game controller
-    'game/(\d+)' => [
-        'controller' => 'game',
-        'action' => 'game'
+    '/showgame/(\d+)' => [
+        'controller' => $game,
+        'action' => 'showgame'
     ]
 ];

@@ -7,25 +7,34 @@ namespace app\core;
 class View
 {
     public $path;
-    public $route;
     public $layout = 'default';
 
-    public function __construct($route)
+    public function __construct($path)
     {
-        $this->route = $route;
-        $this->path = $route['controller'] . '/' . $route['action'];
+        $this->path = $path;
     }
 
+    /*
+     * renders page
+     * @param string title
+     * @param array vars[]
+     * @return void
+     */
     public function render($title, $vars = [])
     {
         extract($vars);
         ob_start();
-        require '../app/views/'. $this->path.'.php';
+        require $this->path;
         $content = ob_get_clean();
         require '../app/views/layouts/'.$this->layout.'.php';
     }
 
-    public static function errorCode($code)
+    /*
+     * renders error page
+     * @param int code
+     * @return null
+     */
+    public static function showError($code)
     {
         http_response_code($code);
         require '../app/views/errors/'.$code.'.php';

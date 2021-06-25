@@ -2,26 +2,16 @@
 
 
 namespace app\core;
-use app\core\View;
 
 abstract class Controller
 {
-    public $route;
     public $view;
     public $model;
 
-    public function __construct($route)
+    public function setModel($name)
     {
-        $this->route = $route;
-        $this->view = new View($route);
-        $this->model = $this->loadModel($route['controller'].'Model');
-    }
-
-    public function loadModel($name)
-    {
-        $path = 'app\models\\'.ucfirst($name);
-        if (class_exists($path))
-        {
+        $path = 'app\\models\\'. $name;
+        if (class_exists($path)) {
             return new $path();
         }
     }
