@@ -30,6 +30,7 @@ class Database
             {
                 $statement->bindValue(':'.$key, $val);
             }
+            //redo
         }
         $statement->execute();
         return $statement;

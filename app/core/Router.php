@@ -58,13 +58,20 @@ class Router
                     $controller = new $controllerPath($this->params);
                     $controller->$action();
                 } else {
-                    View::showError(404);
+                    $this->showError(404);
                 }
             } else {
-                View::showError(404);
+                $this->showError(404);
             }
         } else {
-            View::showError(404);
+            $this->showError(404);
         }
+    }
+
+    private function showError($code)
+    {
+        $staticControllerPath = 'app\controllers\StaticController';
+        $controller = new $staticControllerPath();
+        $controller->showErrorAction($code);
     }
 }

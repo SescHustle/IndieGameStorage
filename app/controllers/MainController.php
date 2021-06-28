@@ -15,17 +15,24 @@ class MainController extends Controller
 
     public function indexAction()
     {
-        $result = $this->model->getGames();
+        $result = $this->model->getAllGames();
         $vars = [
             'games' => $result
         ];
         $this->view = new View('../app/views/main/index.php');
-        $this->view->render('Hello', $vars);
+        $this->view->render('Main', $vars);
     }
 
-    public function aboutAction()
+    public function showgameAction()
     {
-        $this->view = new View('../app/views/main/about.php');
-        $this->view->render('About');
+        $id = explode('/', $_SERVER['REQUEST_URI'])[2];
+        if ($this->model->gameExists($id)) {
+            $arg = $this->model->getData($id);
+            $arg = array_shift($arg);
+            $this->view = new View('../app/views/game/showgame.php');
+            $this->view->render($arg['name'], $arg);
+        } else {
+            echo '404 todo';
+        }
     }
 }

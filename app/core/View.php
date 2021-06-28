@@ -26,17 +26,6 @@ class View
         ob_start();
         require $this->path;
         $content = ob_get_clean();
-        require '../app/views/layouts/'.$this->layout.'.php';
-    }
-
-    /*
-     * renders error page
-     * @param int code
-     * @return null
-     */
-    public static function showError($code)
-    {
-        http_response_code($code);
-        require '../app/views/errors/'.$code.'.php';
+        require '../app/views/layouts/' . $this->layout . '.php';
     }
 }
