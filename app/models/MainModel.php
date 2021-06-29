@@ -4,6 +4,7 @@
 namespace app\models;
 
 use app\core\Model;
+use http\Params;
 
 class MainModel extends Model
 {
@@ -11,22 +12,22 @@ class MainModel extends Model
      * loads all games from database
      * @return array
      */
-    public function getAllGames()
+    public function getAllGames($sort)
     {
-        return $this->sortGames();
+        return $this->sortGames($sort);
     }
 
     /*
      * Sorting all games in a required order
      * @return array
      */
-    public function sortGames()
+    private function sortGames($sort)
     {
         $sql = 'SELECT * FROM games';
-        if (isset($_POST['sort']) == 'rating') {
+        if ($sort === 'rating') {
             $sql = 'SELECT * FROM games ORDER BY rating DESC';
         }
-        if (isset($_POST['sort']) == 'downloads') {
+        if ($sort === 'downloads') {
             $sql = 'SELECT * FROM games ORDER BY downloads DESC';
         }
         return $this->db->row($sql);
@@ -39,8 +40,11 @@ class MainModel extends Model
      */
     public function gameExists($gameid)
     {
-        $sql = "SELECT COUNT(*) FROM games WHERE id=$gameid";
-        $res = ($this->db->row($sql));
+        $params = [
+            'id' => $gameid
+        ];
+        $sql = "SELECT COUNT(*) FROM games WHERE id=:id";
+        $res = ($this->db->row($sql, $params));
         $res = array_shift($res);
         return array_shift($res) == '1';
     }
@@ -52,7 +56,10 @@ class MainModel extends Model
      */
     public function getData($gameid)
     {
-        $sql = "SELECT * FROM games WHERE id=$gameid";
-        return $this->db->row("SELECT * FROM games WHERE id=$gameid");
+        $params = [
+            'id' => $gameid
+        ];
+        $sql = "SELECT * FROM games WHERE id=:id";
+        return $this->db->row($sql, $params);
     }
 }

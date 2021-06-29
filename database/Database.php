@@ -30,7 +30,6 @@ class Database
             {
                 $statement->bindValue(':'.$key, $val);
             }
-            //redo
         }
         $statement->execute();
         return $statement;
@@ -44,7 +43,7 @@ class Database
      */
     public function row($sql, $params = [])
     {
-        $result = $this->query($sql);
+        $result = $this->query($sql, $params);
         return $result->fetchAll(PDO::FETCH_ASSOC);
     }
 }
