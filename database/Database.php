@@ -4,6 +4,7 @@
 namespace database;
 
 use PDO;
+
 class Database
 {
     protected $db;
@@ -11,7 +12,7 @@ class Database
     public function __construct()
     {
         $config = require '../database/dbconfig.php';
-        $dbn = 'mysql:dbname='.$config['dbname'].';host='.$config['host'].';charset=utf8';
+        $dbn = 'mysql:dbname=' . $config['dbname'] . ';host=' . $config['host'] . ';charset=utf8';
         $this->db = new PDO($dbn, $config['user'], $config['password']);
     }
 
@@ -19,6 +20,7 @@ class Database
      * making sql query for database
      * @param string sql
      * @param array params[]
+     *
      * @return PDO::statement
      */
     public function query($sql, $params = [])
@@ -28,7 +30,7 @@ class Database
         {
             foreach ($params as $key => $val)
             {
-                $statement->bindValue(':'.$key, $val);
+                $statement->bindValue(':' . $key, $val);
             }
         }
         $statement->execute();
@@ -39,6 +41,7 @@ class Database
      * show query results as array
      * @param string sql
      * @param array params
+     *
      * @return array
      */
     public function row($sql, $params = [])

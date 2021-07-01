@@ -15,12 +15,27 @@ class MainController extends Controller
 
     public function indexAction()
     {
-        if (isset($_POST['sort'])) {
+        $sort = 'id';
+        $order = 'DESC';
+        $search ='';
+        $categories = [];
+        if (isset($_POST['sort']))
+        {
             $sort = $_POST['sort'];
-        } else {
-            $sort = 'id';
         }
-        $result = $this->model->getAllGames($sort);
+        if (isset($_POST['order']))
+        {
+            $order =$_POST['order'];
+        }
+        if (isset($_POST['search']))
+        {
+            $search =$_POST['search'];
+        }
+        if (isset($_POST['categories']))
+        {
+            $categories =$_POST['categories'];
+        }
+        $result = $this->model->getGames($search, $sort, $order, $categories);
         $vars = [
             'games' => $result
         ];

@@ -1,5 +1,5 @@
 <!-- Footer -->
-<footer class="py-4 pt-md-5 bg-dark text-light text-center">
+<div class="bg-dark text-light text-center">
     <!-- Copyright -->
     <div class="row">
         <div class="col-12 col-md">
@@ -8,5 +8,5 @@
         </div>
     </div>
     <!-- Copyright -->
-</footer>
+</div>
 <!-- Footer -->
