@@ -12,13 +12,13 @@ class AccountController extends Controller
         $this->model = $this->setModel('AccountModel');
     }
 
-    public function loginAction()
+    public function loginPageAction()
     {
         $this->view = new View('../app/views/account/login.php');
         $this->view->render('Log in');
     }
 
-    public function registerAction()
+    public function registerPageAction()
     {
         $this->view = new View('../app/views/account/register.php');
         $this->view->render('Sign up');

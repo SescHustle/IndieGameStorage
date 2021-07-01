@@ -1,4 +1,4 @@
-<h3>Sign up</h3>
+<h1>Sign up</h1>
 <form>
     <div class="form-group">
         <label for="EmailInput">Email address</label>

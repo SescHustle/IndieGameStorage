@@ -5,8 +5,8 @@ namespace app\core;
 
 abstract class Controller
 {
-    public $view;
-    public $model;
+    protected $view;
+    protected $model;
 
     protected function setModel($name)
     {

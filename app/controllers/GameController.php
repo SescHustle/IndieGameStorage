@@ -6,21 +6,32 @@ namespace app\controllers;
 use app\core\Controller;
 use app\core\View;
 
-class MainController extends Controller
+class GameController extends Controller
 {
     public function __construct()
     {
         $this->model = $this->setModel('MainModel');
     }
 
-    public function indexAction()
+    public function indexPageAction()
     {
+        $sort = 'id';
+        $order = 'DESC';
+        $search = '';
+        $categories = [];
         if (isset($_POST['sort'])) {
             $sort = $_POST['sort'];
-        } else {
-            $sort = 'id';
         }
-        $result = $this->model->getAllGames($sort);
+        if (isset($_POST['order'])) {
+            $order = $_POST['order'];
+        }
+        if (isset($_POST['search'])) {
+            $search = $_POST['search'];
+        }
+        if (isset($_POST['categories'])) {
+            $categories = $_POST['categories'];
+        }
+        $result = $this->model->getGames($search, $sort, $order, $categories);
         $vars = [
             'games' => $result
         ];
@@ -37,7 +48,7 @@ class MainController extends Controller
             $this->view = new View('../app/views/game/showgame.php');
             $this->view->render($arg['name'], $arg);
         } else {
-            echo '404 todo';
+            echo '404';
         }
     }
 }

@@ -7,9 +7,9 @@ namespace app\controllers;
 use app\core\Controller;
 use app\core\View;
 
-class StaticController extends Controller
+class StaticPageController extends Controller
 {
-    public function aboutAction()
+    public function aboutPageAction()
     {
         $this->view = new View('../app/views/main/about.php');
         $this->view->render('About');

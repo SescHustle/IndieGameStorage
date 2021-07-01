@@ -1,1 +1,1 @@
-<h3><?php echo '404 error'?></h3>
+<h1>404 Error</h1>

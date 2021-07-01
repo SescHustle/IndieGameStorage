@@ -1,34 +1,27 @@
 <?php
 
-$main = 'app\controllers\MainController';
+$game = 'app\controllers\GameController';
 $account = 'app\controllers\AccountController';
-$static = 'app\controllers\StaticController';
+$static = 'app\controllers\StaticPageController';
 return [
-    //Main controller
     '/' => [
-        'controller' => $main,
-        'action' => 'index'
-    ],
-    '/index.php' => [
-        'controller' => $main,
-        'action' => 'index'
+        'controller' => $game,
+        'action' => 'indexPage'
     ],
     '/showgame/(\d+)' => [
-        'controller' => $main,
-        'action' => 'showgame'
+        'controller' => $game,
+        'action' => 'showGame'
     ],
-    //Account controller
     '/login' => [
         'controller' => $account,
-        'action' => 'login'
+        'action' => 'loginPage'
     ],
     '/register' => [
         'controller' => $account,
-        'action' => 'register'
+        'action' => 'registerPage'
     ],
-    //static controller
     '/about' => [
         'controller' => $static,
-        'action' => 'about'
+        'action' => 'aboutPage'
     ]
 ];
