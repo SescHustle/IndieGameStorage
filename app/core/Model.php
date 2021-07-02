@@ -2,11 +2,12 @@
 
 
 namespace app\core;
+
 use database\Database;
 
 abstract class Model
 {
-    public $db;
+    protected $db;
 
     public function __construct()
     {

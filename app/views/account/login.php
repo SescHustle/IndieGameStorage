@@ -1,5 +1,5 @@
 <div class="container align-content-center col-4" >
-    <h3>Log in</h3>
+    <h1>Log in</h1>
     <form>
         <div class="form-group">
             <label for="exampleInputEmail1">Email address</label>

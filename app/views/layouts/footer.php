@@ -7,6 +7,4 @@
             <a class="text-reset fw-bold" href="/">PlayIndie</a>
         </div>
     </div>
-    <!-- Copyright -->
 </div>
-<!-- Footer -->

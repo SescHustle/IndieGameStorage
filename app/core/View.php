@@ -6,20 +6,14 @@ namespace app\core;
 
 class View
 {
-    public $path;
-    public $layout = 'default';
+    private $path;
+    private $layout = 'default';
 
     public function __construct($path)
     {
         $this->path = $path;
     }
 
-    /*
-     * renders page
-     * @param string title
-     * @param array vars[]
-     * @return void
-     */
     public function render($title, $vars = [])
     {
         extract($vars);

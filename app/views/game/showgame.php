@@ -1,6 +1,6 @@
-<h3><?php
-    echo $name; ?> page </h3>
+<h1><?php
+    echo $name; ?> </h1>
 <hr>
 <?php
-echo "\"" . $description . "\", Author: " . $author; ?>
+echo '"' . $description . '"'; ?>
 

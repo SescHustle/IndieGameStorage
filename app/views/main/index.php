@@ -1,17 +1,25 @@
-<div class="container-fluid bg-dark text-light">
+<div class="container-fluid">
     <div class="container">
         <a name="games">
-            <h1 style="color: white">Games</h1>
+            <h1>Games</h1>
         </a>
         <div class="input-group flex-nowrap">
             <form method="post">
-                <button type="submit" class="btn btn-outline-light" name="sort" value="rating">Sort by rating</button>
-                <button type="submit" class="btn btn-outline-light" name="sort" value="downloads">
+                <button type="submit" class="btn btn-outline-dark" name="sort" value="rating">Sort by rating</button>
+                <button type="submit" class="btn btn-outline-dark" name="sort" value="downloads">
                     Sort by downloads
                 </button>
                 <select class="form-select input-focus-width" name="order">
-                    <option value="DESC" <?php if (isset($_POST['order']) && $_POST['order'] === "DESC")  echo "selected";?>>DESC</option>
-                    <option value="ASC" <?php if (isset($_POST['order']) && $_POST['order'] === "ASC")  echo "selected";?>>ASC</option>
+                    <option value="DESC" <?php
+                    if (isset($_POST['order']) && $_POST['order'] === "DESC") {
+                        echo "selected";
+                    } ?>>DESC
+                    </option>
+                    <option value="ASC" <?php
+                    if (isset($_POST['order']) && $_POST['order'] === "ASC") {
+                        echo "selected";
+                    } ?>>ASC
+                    </option>
                 </select>
                 <input type="checkbox" name="categories[]" value="Action">Action
                 <input type="checkbox" name="categories[]" value="AAA">AAA

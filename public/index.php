@@ -1,4 +1,5 @@
 <?php
+
 require_once '../storage/debug.php';
 require_once '../storage/autoload.php';
 

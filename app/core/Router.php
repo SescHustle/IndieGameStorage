@@ -5,8 +5,8 @@ namespace app\core;
 
 class Router
 {
-    public $routes = [];
-    public $params = [];
+    private $routes = [];
+    private $params = [];
 
     public function __construct()
     {
@@ -16,23 +16,13 @@ class Router
         }
     }
 
-    /*
-     * fills routes[] from routes/router.php
-     * @param string route
-     * @param array params
-     * return void
-     */
-    public function addRoute($route, $params)
+    private function addRoute($route, $params)
     {
         $route = '#^' . $route . '$#';
         $this->routes[$route] = $params;
     }
 
-    /*
-     * checking if url route exists
-     * @return bool
-     */
-    public function match()
+    private function match()
     {
         $url = $_SERVER['REQUEST_URI'];
         foreach ($this->routes as $route => $params) {
@@ -44,10 +34,6 @@ class Router
         return false;
     }
 
-    /*
-     * loads needed page
-     * @return void
-     */
     public function run()
     {
         if ($this->match()) {
@@ -70,7 +56,7 @@ class Router
 
     private function showError($code)
     {
-        $staticControllerPath = 'app\controllers\StaticController';
+        $staticControllerPath = 'app\controllers\StaticPageController';
         $controller = new $staticControllerPath();
         $controller->showErrorAction($code);
     }
