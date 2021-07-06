@@ -10,7 +10,7 @@ class GameController extends Controller
 {
     public function __construct()
     {
-        $this->model = $this->setModel('MainModel');
+        $this->model = $this->setModel('GameModel');
     }
 
     public function indexPageAction()

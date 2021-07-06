@@ -5,7 +5,7 @@ namespace app\models;
 
 use app\core\Model;
 
-class MainModel extends Model
+class GameModel extends Model
 {
 
     public function getGames($search, $sort, $order, $categories)
