@@ -8,17 +8,19 @@ use app\core\Model;
 
 class AccountModel extends Model
 {
-    public function addUser($login, $email, $password){
+    public function addUser($login, $email, $password)
+    {
         $params = [
-          'login' => $login,
-          'email' => $email,
-          'password' => password_hash($password, PASSWORD_BCRYPT)
+            'login' => $login,
+            'email' => $email,
+            'password' => password_hash($password, PASSWORD_BCRYPT)
         ];
         $sql = 'INSERT INTO user(login, email, password) VALUES(:login, :email, :password)';
         $this->db->query($sql, $params);
     }
 
-    public function userExists($login, $email){
+    public function loginOrEmailIsTaken($login, $email)
+    {
         $params = [
             'login' => $login,
             'email' => $email
@@ -29,9 +31,15 @@ class AccountModel extends Model
         return array_shift($res) == '1';
     }
 
-    public function checkUserPassword($password){
-        //
-        return false;
+    public function userDataCorrect($login, $password)
+    {
+        $params = [
+            'login' => $login
+        ];
+        $sql = 'SELECT password FROM user WHERE login=:login';
+        $hash = $this->db->row($sql, $params);
+        $hash = array_shift($hash);
+        return password_verify($password, $hash['password']);
     }
 
 }

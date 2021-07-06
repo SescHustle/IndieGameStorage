@@ -20,6 +20,10 @@ return [
         'controller' => $account,
         'action' => 'registerPage'
     ],
+    '/profile' => [
+      'controller' => $account,
+      'action' => 'profilePage'
+    ],
     '/about' => [
         'controller' => $static,
         'action' => 'aboutPage'
