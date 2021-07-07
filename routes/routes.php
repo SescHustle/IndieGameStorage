@@ -2,6 +2,7 @@
 
 $game = 'app\controllers\GameController';
 $account = 'app\controllers\AccountController';
+$login = 'app\controllers\LoginController';
 $static = 'app\controllers\StaticPageController';
 return [
     '/' => [
@@ -13,16 +14,16 @@ return [
         'action' => 'showGame'
     ],
     '/login' => [
-        'controller' => $account,
+        'controller' => $login,
         'action' => 'loginPage'
     ],
     '/register' => [
-        'controller' => $account,
+        'controller' => $login,
         'action' => 'registerPage'
     ],
     '/profile' => [
-      'controller' => $account,
-      'action' => 'profilePage'
+        'controller' => $account,
+        'action' => 'profilePage'
     ],
     '/about' => [
         'controller' => $static,
