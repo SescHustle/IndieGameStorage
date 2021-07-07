@@ -104,7 +104,7 @@ class LoginController extends Controller
         $_SESSION['user'] = $login;
         if (!$this->model->userConfirmed($login)){
             $_SESSION['unverified'] = true;
-            header('Location: /profile');
         }
+        header('Location: /profile');
     }
 }
