@@ -8,6 +8,8 @@ use app\core\Controller;
 use app\core\View;
 use app\core\Validator;
 
+use function storage\generateRandomString;
+
 class LoginController extends Controller
 {
     public function __construct()
@@ -23,8 +25,7 @@ class LoginController extends Controller
             $login = $_POST['login'];
             $password = $_POST['password'];
             if ($this->tryLogin($login, $password)) {
-                $_SESSION['user'] = $login;
-                header('Location: /profile');
+                $this->doLogin($login);
             }
         }
         $this->view = new View('../app/views/account/login.php');
@@ -41,13 +42,22 @@ class LoginController extends Controller
             $password = $_POST['password'];
             $confirm = $_POST['confirm'];
             if ($this->tryRegister($login, $email, $password, $confirm)) {
-                $this->model->addUser($login, $email, $password);
+                $token = generateRandomString();
+                $this->model->addUser($login, $email, $password, $token);
                 $_SESSION['user'] = $login;
-                header('Location: /profile');
+                $_SESSION['unverified'] = true;
+                mail($email, 'Verify your email', $_SERVER['SERVER_NAME'] . '/verify/' . $token);
+                header('Location: /register/success');
             }
         }
         $this->view = new View('../app/views/account/register.php');
         $this->view->render('Sign up');
+    }
+
+    public function registerSuccessPageAction()
+    {
+        $this->view = new View('../app/views/account/registrationSuccessful.php');
+        $this->view->render('Registration successful');
     }
 
     private function tryLogin($login, $password)
@@ -71,13 +81,6 @@ class LoginController extends Controller
         return false;
     }
 
-    /**
-     * @param $login
-     * @param $email
-     * @param $password
-     * @param $confirm
-     * @return bool
-     */
     private function tryRegister($login, $email, $password, $confirm)
     {
         $validator = new Validator();
@@ -94,5 +97,14 @@ class LoginController extends Controller
             }
         }
         return empty($_SESSION['registerMessages']);
+    }
+
+    private function doLogin($login)
+    {
+        $_SESSION['user'] = $login;
+        if (!$this->model->userConfirmed($login)){
+            $_SESSION['unverified'] = true;
+            header('Location: /profile');
+        }
     }
 }

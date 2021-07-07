@@ -25,4 +25,13 @@ class AccountController extends Controller
         $this->view = new View('../app/views/account/profile.php');
         $this->view->render('Profile');
     }
+
+    public function verifyAction(){
+        $token = explode('/', $_SERVER['REQUEST_URI'])[2];
+        if ($this->model->verifyEmail($token)){
+            $this->view = new View('../app/views/account/verify.php');
+            $this->view->render('Verification success');
+        }
+        else echo '404';
+    }
 }

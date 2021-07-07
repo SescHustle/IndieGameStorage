@@ -21,9 +21,17 @@ return [
         'controller' => $login,
         'action' => 'registerPage'
     ],
+    '/register/success' => [
+        'controller' => $login,
+        'action' => 'registerSuccessPage'
+    ],
     '/profile' => [
         'controller' => $account,
         'action' => 'profilePage'
+    ],
+    '/verify/(\w+)' => [
+        'controller' => $account,
+        'action' => 'verify'
     ],
     '/about' => [
         'controller' => $static,
