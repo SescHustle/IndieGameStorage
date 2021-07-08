@@ -46,7 +46,6 @@
                 if (isset($_POST['categories']) && in_array('Shooter', $_POST['categories'])) {
                     echo 'checked';
                 } ?>>Shooter
-                <!--todo: default label must be last selected-->
                 <input type="search" name="search" value="<?php
                 if (isset($_POST['search'])) {
                     echo $_POST['search'];

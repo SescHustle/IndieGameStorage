@@ -26,7 +26,7 @@
                         </a>
                     </li>
                 </ul>
-            </div> <!--collapse navbar-collapse justify-content-md-end-->
-        </div> <!--container-fluid-->
+            </div>
+        </div>
     </nav>
 </header>
