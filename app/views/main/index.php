@@ -21,12 +21,31 @@
                     } ?>>ASC
                     </option>
                 </select>
-                <input type="checkbox" name="categories[]" value="Action">Action
-                <input type="checkbox" name="categories[]" value="AAA">AAA
-                <input type="checkbox" name="categories[]" value="RPG">RPG
-                <input type="checkbox" name="categories[]" value="Indie">Indie
-                <input type="checkbox" name="categories[]" value="Roguelike">Roguelike
-                <input type="checkbox" name="categories[]" value="Shooter">Shooter
+                <input type="checkbox" name="categories[]" value="Action" <?php
+                if (isset($_POST['categories']) && in_array('Action', $_POST['categories'])) {
+                    echo 'checked';
+                } ?>>Action
+                <input type="checkbox" name="categories[]" value="AAA" <?php
+                if (isset($_POST['categories']) && in_array('AAA', $_POST['categories'])) {
+                    echo 'checked';
+                } ?>>AAA
+                <input type="checkbox" name="categories[]" value="RPG" <?php
+                if (isset($_POST['categories']) && in_array('RPG', $_POST['categories'])) {
+                    echo 'checked';
+                } ?>>RPG
+                <input type="checkbox" name="categories[]" value="Indie" <?php
+                if (isset($_POST['categories']) && in_array('Indie', $_POST['categories'])) {
+                    echo 'checked';
+                } ?>>Indie
+                <input type="checkbox" name="categories[]" value="Roguelike"
+                    <?php
+                    if (isset($_POST['categories']) && in_array('Roguelike', $_POST['categories'])) {
+                        echo 'checked';
+                    } ?>>Roguelike
+                <input type="checkbox" name="categories[]" value="Shooter" <?php
+                if (isset($_POST['categories']) && in_array('Shooter', $_POST['categories'])) {
+                    echo 'checked';
+                } ?>>Shooter
                 <!--todo: default label must be last selected-->
                 <input type="search" name="search" value="<?php
                 if (isset($_POST['search'])) {
