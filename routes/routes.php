@@ -25,6 +25,14 @@ return [
         'controller' => $login,
         'action' => 'registerSuccessPage'
     ],
+    '/recovery' => [
+        'controller' => $login,
+        'action' => 'recovery'
+    ],
+    '/recovery/(\w+)' => [
+        'controller' =>  $account,
+        'action' => 'resetPassword'
+    ],
     '/profile' => [
         'controller' => $account,
         'action' => 'profilePage'

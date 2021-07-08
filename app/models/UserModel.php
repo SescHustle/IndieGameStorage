@@ -78,4 +78,13 @@ class UserModel extends Model
         $res = array_shift($res);
         return array_shift($res) === 'Y';
     }
+
+    public function resetPassword($password, $email){
+        $params = [
+            'password' => password_hash($password, PASSWORD_BCRYPT),
+            'email' => $email
+        ];
+        $sql = 'UPDATE user SET password = :password WHERE email = :email';
+        $this->db->query($sql, $params);
+    }
 }

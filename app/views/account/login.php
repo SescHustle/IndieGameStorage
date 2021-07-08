@@ -12,6 +12,7 @@
         </div>
         <button type="submit" class="btn btn-primary" name="LoginValidate">Log in</button>
     </form>
+    <a href="/recovery">Forgot password?</a>
     <?php
     if (isset($_SESSION['message'])): ?>
         <h1 class="text-danger"><?php

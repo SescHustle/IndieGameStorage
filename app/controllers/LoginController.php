@@ -60,6 +60,27 @@ class LoginController extends Controller
         $this->view->render('Registration successful');
     }
 
+    public function recoveryAction()
+    {
+        if (isset($_SESSION['user'])) {
+            header("Location: /profile");
+        } elseif (isset($_POST['Recovery'])) {
+            $email = $_POST['email'];
+            if ($this->model->emailExists($email)) {
+                $token = generateRandomString();
+                $message = 'To reset your password, follow the link: ' . $_SERVER['SERVER_NAME'] . '/recovery/' . $token;
+                mail($email, 'Account recovery', $message);
+                $_SESSION['passwordResetEmail'] = $email;
+                $_SESSION['recoveryToken'] = $token;
+                $_SESSION['message'] = 'We sent you instructions to recover your account. Please, check your email!';
+            } else {
+                $_SESSION['message'] = 'No user with this email';
+            }
+        }
+        $this->view = new View('../app/views/account/recovery.php');
+        $this->view->render('Recovery');
+    }
+
     private function tryLogin($login, $password)
     {
         $validator = new Validator();
@@ -102,7 +123,7 @@ class LoginController extends Controller
     private function doLogin($login)
     {
         $_SESSION['user'] = $login;
-        if (!$this->model->userConfirmed($login)){
+        if (!$this->model->userConfirmed($login)) {
             $_SESSION['unverified'] = true;
         }
         header('Location: /profile');
