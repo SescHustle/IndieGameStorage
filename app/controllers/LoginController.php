@@ -49,7 +49,7 @@ class LoginController extends Controller
                 $this->model->addUser($username, $email, $password, $token);
                 $_SESSION['user'] = $username;
                 $_SESSION['unconfirmed'] = true;
-                mail($email, 'Verify your email', $_SERVER['SERVER_NAME'] . '/verify/' . $token);
+                mail($email, 'Verify your email', $_SERVER['SERVER_NAME'] . '/confirm/' . $token);
                 header('Location: /register/success');
             }
         }

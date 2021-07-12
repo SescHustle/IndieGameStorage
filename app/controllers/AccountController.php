@@ -66,9 +66,11 @@ class AccountController extends Controller
                 }
                 $page = new PageView('Reset password', 'resetPassword', $this->access);
                 $page->renderPage();
+            }else {
+                header('Location: /profile');
             }
+        } else {
             header('Location: /profile');
         }
-        header('Location: /profile');
     }
 }

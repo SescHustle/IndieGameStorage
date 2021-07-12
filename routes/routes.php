@@ -21,13 +21,13 @@ return [
         'controller' => $login,
         'action' => 'registerPage'
     ],
+    '/register/success' => [
+        'controller' => $login,
+        'action' => 'registerSuccessPage'
+    ],
     '/recovery' => [
         'controller' => $login,
-        'action' => 'recovery'
-    ],
-    '/register/success' => [
-        'controller' => $account,
-        'action' => 'registerSuccessPage'
+        'action' => 'recoveryPage'
     ],
     '/recovery/(\w+)' => [
         'controller' =>  $account,
