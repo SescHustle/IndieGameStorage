@@ -5,6 +5,7 @@ namespace app\controllers;
 
 use app\core\Controller;
 use app\core\View;
+use app\views\PageView;
 
 class GameController extends Controller
 {
@@ -13,7 +14,7 @@ class GameController extends Controller
         $this->model = $this->setModel('GameModel');
     }
 
-    public function indexPageAction()
+    public function mainPageAction()
     {
         $sort = 'id';
         $order = 'DESC';
@@ -35,8 +36,8 @@ class GameController extends Controller
         $vars = [
             'games' => $result
         ];
-        $this->view = new View('../app/views/main/index.php');
-        $this->view->render('Main', $vars);
+        $page = new PageView('Main', 'main', 'guest', $vars);
+        $page->renderPage();
     }
 
     public function showgameAction()
@@ -45,8 +46,8 @@ class GameController extends Controller
         if ($this->model->gameExists($id)) {
             $arg = $this->model->getData($id);
             $arg = array_shift($arg);
-            $this->view = new View('../app/views/game/showgame.php');
-            $this->view->render($arg['name'], $arg);
+            $page = new PageView($arg['name'], 'showgame', 'guest', $arg);
+            $page->renderPage();
         } else {
             echo '404';
         }

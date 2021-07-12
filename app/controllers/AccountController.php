@@ -6,6 +6,7 @@ namespace app\controllers;
 use app\core\Controller;
 use app\core\Validator;
 use app\core\View;
+use app\views\PageView;
 
 class AccountController extends Controller
 {
@@ -23,19 +24,25 @@ class AccountController extends Controller
             session_destroy();
             header('Location: /login');
         }
-        $this->view = new View('../app/views/account/profile.php');
-        $this->view->render('Profile');
+        $page = new PageView('Profile', 'profile', 'user');
+        $page->renderPage();
     }
 
     public function confirmEmailAction()
     {
         $token = explode('/', $_SERVER['REQUEST_URI'])[2];
         if ($this->model->tryConfirmEmail($token)) {
-            $this->view = new View('../app/views/account/verify.php');
-            $this->view->render('Email confirmation success');
+            $page = new PageView('Email is confirmed', 'emailConfirmationSuccess', 'user');
+            $page->renderPage();
         } else {
             echo '404';
         }
+    }
+
+    public function registerSuccessPageAction()
+    {
+        $page = new PageView('Registration success!', 'registrationSuccessful', 'user');
+        $page->renderPage();
     }
 
     public function resetPasswordAction()
@@ -56,8 +63,8 @@ class AccountController extends Controller
                         $_SESSION['message'] = 'Passwords doesn\'t match';
                     }
                 }
-                $this->view = new View('../app/views/account/resetPassword.php');
-                $this->view->render('Reset Password');
+                $page = new PageView('Reset password', 'resetPassword', 'user');
+                $page->renderPage();
             }
             header('Location: /profile');
         }

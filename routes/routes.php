@@ -7,7 +7,7 @@ $static = 'app\controllers\StaticPageController';
 return [
     '/' => [
         'controller' => $game,
-        'action' => 'indexPage'
+        'action' => 'mainPage'
     ],
     '/showgame/(\d+)' => [
         'controller' => $game,
@@ -21,13 +21,13 @@ return [
         'controller' => $login,
         'action' => 'registerPage'
     ],
-    '/register/success' => [
-        'controller' => $login,
-        'action' => 'registerSuccessPage'
-    ],
     '/recovery' => [
         'controller' => $login,
         'action' => 'recovery'
+    ],
+    '/register/success' => [
+        'controller' => $account,
+        'action' => 'registerSuccessPage'
     ],
     '/recovery/(\w+)' => [
         'controller' =>  $account,

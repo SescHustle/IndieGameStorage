@@ -8,6 +8,8 @@ use app\core\Controller;
 use app\core\View;
 use app\core\Validator;
 
+use app\views\PageView;
+
 use function storage\generateRandomString;
 
 class LoginController extends Controller
@@ -28,8 +30,8 @@ class LoginController extends Controller
                 $this->doLogin($username);
             }
         }
-        $this->view = new View('../app/views/account/login.php');
-        $this->view->render('Log in');
+        $page = new PageView('Log in', 'login', 'guest');
+        $page->renderPage();
     }
 
     public function registerPageAction()
@@ -50,17 +52,11 @@ class LoginController extends Controller
                 header('Location: /register/success');
             }
         }
-        $this->view = new View('../app/views/account/register.php');
-        $this->view->render('Sign up');
+        $page = new PageView('Sign up', 'register', 'guest');
+        $page->renderPage();
     }
 
-    public function registerSuccessPageAction()
-    {
-        $this->view = new View('../app/views/account/registrationSuccessful.php');
-        $this->view->render('Registration successful');
-    }
-
-    public function recoveryAction()
+    public function recoveryPageAction()
     {
         if (isset($_SESSION['user'])) {
             header("Location: /profile");
@@ -77,8 +73,8 @@ class LoginController extends Controller
                 $_SESSION['message'] = 'No user with this email';
             }
         }
-        $this->view = new View('../app/views/account/recovery.php');
-        $this->view->render('Recovery');
+        $page = new PageView('Account recovery', 'recovery', 'guest');
+        $page->renderPage();
     }
 
     private function tryLogin($username, $password)
