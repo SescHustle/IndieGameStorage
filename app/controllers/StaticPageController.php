@@ -6,6 +6,7 @@ namespace app\controllers;
 
 use app\core\Controller;
 use app\core\View;
+use app\views\PageView;
 
 class StaticPageController extends Controller
 {
@@ -16,8 +17,8 @@ class StaticPageController extends Controller
 
     public function aboutPageAction()
     {
-        $this->view = new View('../app/views/main/about.php');
-        $this->view->render('About');
+        $page = new PageView('About', 'about', $this->access);
+        $page->renderPage();
     }
 
     public function showErrorAction($code)

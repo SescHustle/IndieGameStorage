@@ -31,7 +31,7 @@ class LoginController extends Controller
                 $this->doLogin($username);
             }
         }
-        $page = new PageView('Log in', 'login', 'guest');
+        $page = new PageView('Log in', 'login', $this->access);
         $page->renderPage();
     }
 
@@ -53,7 +53,7 @@ class LoginController extends Controller
                 header('Location: /register/success');
             }
         }
-        $page = new PageView('Sign up', 'register', 'guest');
+        $page = new PageView('Sign up', 'register', $this->access);
         $page->renderPage();
     }
 
@@ -74,7 +74,7 @@ class LoginController extends Controller
                 $_SESSION['message'] = 'No user with this email';
             }
         }
-        $page = new PageView('Account recovery', 'recovery', 'guest');
+        $page = new PageView('Account recovery', 'recovery', $this->access);
         $page->renderPage();
     }
 

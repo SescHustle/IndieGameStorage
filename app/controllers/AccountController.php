@@ -25,7 +25,7 @@ class AccountController extends Controller
             session_destroy();
             header('Location: /login');
         }
-        $page = new PageView('Profile', 'profile', 'user');
+        $page = new PageView('Profile', 'profile', $this->access);
         $page->renderPage();
     }
 
@@ -33,7 +33,7 @@ class AccountController extends Controller
     {
         $token = explode('/', $_SERVER['REQUEST_URI'])[2];
         if ($this->model->tryConfirmEmail($token)) {
-            $page = new PageView('Email is confirmed', 'emailConfirmationSuccess', 'user');
+            $page = new PageView('Email is confirmed', 'emailConfirmationSuccess', $this->access);
             $page->renderPage();
         } else {
             echo '404';
@@ -42,7 +42,7 @@ class AccountController extends Controller
 
     public function registerSuccessPageAction()
     {
-        $page = new PageView('Registration success!', 'registrationSuccessful', 'user');
+        $page = new PageView('Registration success!', 'registrationSuccessful', $this->access);
         $page->renderPage();
     }
 
@@ -64,7 +64,7 @@ class AccountController extends Controller
                         $_SESSION['message'] = 'Passwords doesn\'t match';
                     }
                 }
-                $page = new PageView('Reset password', 'resetPassword', 'user');
+                $page = new PageView('Reset password', 'resetPassword', $this->access);
                 $page->renderPage();
             }
             header('Location: /profile');

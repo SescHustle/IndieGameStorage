@@ -37,11 +37,7 @@ class GameController extends Controller
         $vars = [
             'games' => $result
         ];
-        if (isset($_SESSION['user'])) {
-            $page = new PageView('Main', 'main', 'user', $vars);
-        } else {
-            $page = new PageView('Main', 'main', 'guest', $vars);
-        }
+        $page = new PageView('Main', 'main', $this->access, $vars);
         $page->renderPage();
     }
 
@@ -52,7 +48,7 @@ class GameController extends Controller
             $arg = $this->model->getData($id);
             $arg = array_shift($arg);
 
-            $page = new PageView($arg['name'], 'showgame', 'guest', $arg);
+            $page = new PageView($arg['name'], 'showgame', $this->access, $arg);
             $page->renderPage();
         } else {
             echo '404';
