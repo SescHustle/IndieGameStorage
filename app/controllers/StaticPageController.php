@@ -9,6 +9,11 @@ use app\core\View;
 
 class StaticPageController extends Controller
 {
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
     public function aboutPageAction()
     {
         $this->view = new View('../app/views/main/about.php');

@@ -11,7 +11,8 @@ class GameController extends Controller
 {
     public function __construct()
     {
-        $this->model = $this->setModel('GameModel');
+        parent::__construct();
+        $this->setModel('GameModel');
     }
 
     public function mainPageAction()
@@ -36,7 +37,11 @@ class GameController extends Controller
         $vars = [
             'games' => $result
         ];
-        $page = new PageView('Main', 'main', 'guest', $vars);
+        if (isset($_SESSION['user'])) {
+            $page = new PageView('Main', 'main', 'user', $vars);
+        } else {
+            $page = new PageView('Main', 'main', 'guest', $vars);
+        }
         $page->renderPage();
     }
 
@@ -46,6 +51,7 @@ class GameController extends Controller
         if ($this->model->gameExists($id)) {
             $arg = $this->model->getData($id);
             $arg = array_shift($arg);
+
             $page = new PageView($arg['name'], 'showgame', 'guest', $arg);
             $page->renderPage();
         } else {

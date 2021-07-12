@@ -16,7 +16,8 @@ class LoginController extends Controller
 {
     public function __construct()
     {
-        $this->model = $this->setModel('UserModel');
+        parent::__construct();
+        $this->setModel('UserModel');
     }
 
     public function loginPageAction()
