@@ -21,18 +21,18 @@ class GameModel extends Model
             $order = 'DESC';
         }
         if (!empty($categories)) {
-            $sql = 'SELECT games.* FROM games LEFT JOIN games_categories ON games.id = games_categories.game_id
-                LEFT JOIN categories ON categories.id = games_categories.category_id WHERE (';
+            $sql = 'SELECT game.* FROM game LEFT JOIN game_category ON game.id = game_category.game_id
+                LEFT JOIN category ON category.id = game_category.category_id WHERE (';
             for ($i = 1; $i <= count($categories); ++$i) {
                 $params['category' . $i] = $categories[$i - 1];
-                $sql = $sql . 'categories.name = :category' . $i;
+                $sql = $sql . 'category.name = :category' . $i;
                 if ($i !== count($categories)) {
                     $sql = $sql . ' OR ';
                 }
             }
-            $sql = $sql . ') GROUP BY games.id HAVING ((name LIKE "%":search"%") OR (description LIKE "%":search"%")) ORDER BY ' . $sort . ' ' . $order;
+            $sql = $sql . ') GROUP BY game.id HAVING ((name LIKE "%":search"%") OR (description LIKE "%":search"%")) ORDER BY ' . $sort . ' ' . $order;
         } else {
-            $sql = 'SELECT * FROM games WHERE (name LIKE "%":search"%") OR (description LIKE "%":search"%") ORDER BY ' . $sort . ' ' . $order;
+            $sql = 'SELECT * FROM game WHERE (name LIKE "%":search"%") OR (description LIKE "%":search"%") ORDER BY ' . $sort . ' ' . $order;
         }
         return $this->db->query($sql, $params);
     }
@@ -42,7 +42,7 @@ class GameModel extends Model
         $params = [
             'id' => $gameid
         ];
-        $sql = 'SELECT COUNT(*) FROM games WHERE id=:id';
+        $sql = 'SELECT COUNT(*) FROM game WHERE id=:id';
         $res = ($this->db->row($sql, $params));
         $res = array_shift($res);
         return array_shift($res) == '1';
@@ -53,7 +53,7 @@ class GameModel extends Model
         $params = [
             'id' => $gameid
         ];
-        $sql = 'SELECT * FROM games WHERE id=:id';
+        $sql = 'SELECT * FROM game WHERE id=:id';
         return $this->db->row($sql, $params);
     }
 }

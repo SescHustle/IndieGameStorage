@@ -27,12 +27,12 @@ class AccountController extends Controller
         $this->view->render('Profile');
     }
 
-    public function verifyAction()
+    public function confirmEmailAction()
     {
         $token = explode('/', $_SERVER['REQUEST_URI'])[2];
-        if ($this->model->verifyEmail($token)) {
+        if ($this->model->tryConfirmEmail($token)) {
             $this->view = new View('../app/views/account/verify.php');
-            $this->view->render('Verification success');
+            $this->view->render('Email confirmation success');
         } else {
             echo '404';
         }

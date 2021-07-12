@@ -5,8 +5,8 @@
             <label for="EmailInput">Email address</label>
             <input type="email" name="email" class="form-control" id="EmailInput" aria-describedby="emailHelp"
                    placeholder="Enter email">
-            <label for="login">Login</label>
-            <input type="text" name="login" class="form-control" id="login" placeholder="Enter Login">
+            <label for="username">Username</label>
+            <input type="text" name="username" class="form-control" id="username" placeholder="Enter username">
             <label for="Password">Password</label>
             <input type="password" name="password" class="form-control" id="Password" placeholder="Enter Password">
             <label for="ConfirmPassword">Confirm Password</label>

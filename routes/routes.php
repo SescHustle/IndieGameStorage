@@ -37,9 +37,9 @@ return [
         'controller' => $account,
         'action' => 'profilePage'
     ],
-    '/verify/(\w+)' => [
+    '/confirm/(\w+)' => [
         'controller' => $account,
-        'action' => 'verify'
+        'action' => 'confirmEmail'
     ],
     '/about' => [
         'controller' => $static,

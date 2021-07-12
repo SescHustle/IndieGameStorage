@@ -7,35 +7,35 @@ use app\core\Model;
 
 class UserModel extends Model
 {
-    public function addUser($login, $email, $password, $token)
+    public function addUser($username, $email, $password, $token)
     {
         $params = [
-            'login' => $login,
+            'username' => $username,
             'email' => $email,
             'password' => password_hash($password, PASSWORD_BCRYPT),
             'token' => $token
         ];
-        $sql = 'INSERT INTO user(login, email, password, token, Confirmed) VALUES(:login, :email, :password, :token, "N")';
+        $sql = 'INSERT INTO user(username, email, password, token, Confirmed) VALUES(:username, :email, :password, :token, "N")';
         $this->db->query($sql, $params);
     }
 
-    public function checkUserPassword($login, $password)
+    public function checkUserPassword($username, $password)
     {
         $params = [
-            'login' => $login
+            'username' => $username
         ];
-        $sql = 'SELECT password FROM user WHERE login=:login';
+        $sql = 'SELECT password FROM user WHERE username = :username';
         $hash = $this->db->row($sql, $params);
         $hash = array_shift($hash);
         return password_verify($password, $hash['password']);
     }
 
-    public function userExists($login)
+    public function userExists($username)
     {
         $params = [
-            'login' => $login
+            'username' => $username
         ];
-        $sql = 'SELECT COUNT(*) FROM user WHERE login=:login';
+        $sql = 'SELECT COUNT(*) FROM user WHERE username = :username';
         $res = ($this->db->row($sql, $params));
         $res = array_shift($res);
         return array_shift($res) === '1';
@@ -46,13 +46,13 @@ class UserModel extends Model
         $params = [
             'email' => $email
         ];
-        $sql = 'SELECT COUNT(*) FROM user WHERE email=:email';
+        $sql = 'SELECT COUNT(*) FROM user WHERE email = :email';
         $res = ($this->db->row($sql, $params));
         $res = array_shift($res);
         return array_shift($res) === '1';
     }
 
-    public function verifyEmail($token)
+    public function tryConfirmEmail($token)
     {
         $params = [
             'token' => $token
@@ -68,12 +68,12 @@ class UserModel extends Model
         return false;
     }
 
-    public function userConfirmed($login)
+    public function userConfirmed($username)
     {
         $params = [
-            'login' => $login
+            'username' => $username
         ];
-        $sql = 'SELECT Confirmed FROM user WHERE login = :login';
+        $sql = 'SELECT confirmed FROM user WHERE username = :username';
         $res = ($this->db->row($sql, $params));
         $res = array_shift($res);
         return array_shift($res) === 'Y';

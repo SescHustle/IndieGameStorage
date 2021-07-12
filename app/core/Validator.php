@@ -7,22 +7,22 @@ namespace app\core;
 class Validator
 {
 
-    public function ValidateLoginData($login, $password)
+    public function ValidateLoginData($username, $password)
     {
-        return ($login !== '' && $password !== '');
+        return ($username !== '' && $password !== '');
     }
 
-    public function ValidateRegisterData($login, $email, $password, $confirm)
+    public function ValidateRegisterData($username, $email, $password, $confirm)
     {
-        if ($login === '' || $password === '' || $email === '' || $confirm === '') {
+        if ($username === '' || $password === '' || $email === '' || $confirm === '') {
             $_SESSION['registerMessages'][] = 'All fields must be filled';
         }
-        $this->validateLogin();
+        $this->validateUsername();
         $this->validatePassword($password);
         return empty($_SESSION['registerMessages']);
     }
 
-    private function validateLogin()
+    private function validateUsername()
     {
         //
     }
