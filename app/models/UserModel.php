@@ -16,7 +16,7 @@ class UserModel extends Model
             'token' => $token
         ];
         $sql = 'INSERT INTO user(username, email, password, token, Confirmed) VALUES(:username, :email, :password, :token, "N")';
-        $this->db->query($sql, $params);
+        $this->db->doQuery($sql, $params);
     }
 
     public function checkUserPassword($username, $password)
@@ -25,8 +25,7 @@ class UserModel extends Model
             'username' => $username
         ];
         $sql = 'SELECT password FROM user WHERE username = :username';
-        $hash = $this->db->row($sql, $params);
-        $hash = array_shift($hash);
+        $hash = $this->db->selectOneString($sql, $params);
         return password_verify($password, $hash['password']);
     }
 
@@ -35,10 +34,8 @@ class UserModel extends Model
         $params = [
             'username' => $username
         ];
-        $sql = 'SELECT COUNT(*) FROM user WHERE username = :username';
-        $res = ($this->db->row($sql, $params));
-        $res = array_shift($res);
-        return array_shift($res) === '1';
+        $sql = 'SELECT username FROM user WHERE username = :username';
+        return $this->db->selectIsNotEmpty($sql, $params);
     }
 
     public function emailExists($email)
@@ -46,10 +43,8 @@ class UserModel extends Model
         $params = [
             'email' => $email
         ];
-        $sql = 'SELECT COUNT(*) FROM user WHERE email = :email';
-        $res = ($this->db->row($sql, $params));
-        $res = array_shift($res);
-        return array_shift($res) === '1';
+        $sql = 'SELECT email FROM user WHERE email = :email';
+        return $this->db->selectIsNotEmpty($sql, $params);
     }
 
     public function tryConfirmEmail($token)
@@ -57,12 +52,10 @@ class UserModel extends Model
         $params = [
             'token' => $token
         ];
-        $sql = 'SELECT COUNT(*) FROM user WHERE token = :token';
-        $res = ($this->db->row($sql, $params));
-        $res = array_shift($res);
-        if (array_shift($res) === '1') {
+        $sql = 'SELECT token FROM user WHERE token = :token';
+        if($this->db->selectIsNotEmpty($sql, $params)) {
             $sql = 'UPDATE user SET token = NULL, confirmed = "Y" WHERE token = :token';
-            $this->db->query($sql, $params);
+            $this->db->doQuery($sql, $params);
             return true;
         }
         return false;
@@ -73,10 +66,8 @@ class UserModel extends Model
         $params = [
             'username' => $username
         ];
-        $sql = 'SELECT confirmed FROM user WHERE username = :username';
-        $res = ($this->db->row($sql, $params));
-        $res = array_shift($res);
-        return array_shift($res) === 'Y';
+        $sql = 'SELECT confirmed FROM user WHERE username = :username AND confirmed = "Y"';
+        return $this->db->selectIsNotEmpty($sql, $params);
     }
 
     public function resetPassword($password, $email){
@@ -85,6 +76,6 @@ class UserModel extends Model
             'email' => $email
         ];
         $sql = 'UPDATE user SET password = :password WHERE email = :email';
-        $this->db->query($sql, $params);
+        $this->db->doQuery($sql, $params);
     }
 }

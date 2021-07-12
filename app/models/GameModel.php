@@ -34,7 +34,7 @@ class GameModel extends Model
         } else {
             $sql = 'SELECT * FROM game WHERE (name LIKE "%":search"%") OR (description LIKE "%":search"%") ORDER BY ' . $sort . ' ' . $order;
         }
-        return $this->db->query($sql, $params);
+        return $this->db->selectAsArray($sql, $params);
     }
 
     public function gameExists($gameid)
@@ -42,10 +42,8 @@ class GameModel extends Model
         $params = [
             'id' => $gameid
         ];
-        $sql = 'SELECT COUNT(*) FROM game WHERE id=:id';
-        $res = ($this->db->row($sql, $params));
-        $res = array_shift($res);
-        return array_shift($res) == '1';
+        $sql = 'SELECT id FROM game WHERE id=:id';
+        return ($this->db->selectIsNotEmpty($sql, $params));
     }
 
     public function getData($gameid)
@@ -54,6 +52,6 @@ class GameModel extends Model
             'id' => $gameid
         ];
         $sql = 'SELECT * FROM game WHERE id=:id';
-        return $this->db->row($sql, $params);
+        return $this->db->selectAsArray($sql, $params);
     }
 }

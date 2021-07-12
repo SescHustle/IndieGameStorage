@@ -16,7 +16,7 @@ class Database
         $this->db = new PDO($dbn, $config['user'], $config['password']);
     }
 
-    public function query($sql, $params = [])
+    public function doQuery($sql, $params = [])
     {
         $statement = $this->db->prepare($sql);
         if (!empty($params)) {
@@ -28,9 +28,22 @@ class Database
         return $statement;
     }
 
-    public function row($sql, $params = [])
+    public function selectAsArray($sql, $params = [])
     {
-        $result = $this->query($sql, $params);
+        $result = $this->doQuery($sql, $params);
         return $result->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function selectIsNotEmpty($sql, $params)
+    {
+        $select = $this->doQuery($sql, $params);
+        return $select->rowCount();
+    }
+
+    public function selectOneString($sql, $params = [])
+    {
+        $result = $this->doQuery($sql, $params);
+        return $result->fetch(PDO::FETCH_ASSOC);
+
     }
 }
