@@ -1,0 +1,46 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  min-height: 100vh;
+}
+header {
+  align-content: center;
+  background-color: #051136;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+header .nav-link {
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 2px solid transparent;
+  border-radius: 0.5rem;
+  background: none;
+}
+header .nav-link:hover,
+header .nav-link:active {
+  border-color: #FF8000;
+  transition: 0.2s linear;
+}
+.welcome-text {
+  padding: 2rem;
+  border: 2px solid #FF8000;
+  border-radius: 0.5rem;
+  text-align: center;
+}
+.footer {
+  margin-top: auto;
+}
+.card:hover {
+  transform: scale(1.05);
+  transition: 0.4s;
+}
+.teaser-link {
+  text-decoration: none;
+}
+.teaser-link .row:hover {
+  border-color: #FF8000;
+  transition: 0.2s linear;
+}
+/*# sourceMappingURL=style.css.map */
