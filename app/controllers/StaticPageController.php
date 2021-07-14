@@ -24,7 +24,7 @@ class StaticPageController extends Controller
     public function showErrorAction($code)
     {
         http_response_code($code);
-        $this->view = new View('../app/views/errors/' . $code . '.php');
-        $this->view->render('404 Error');
+        $page = new PageView('404', '404', $this->access);
+        $page->renderPage();
     }
 }

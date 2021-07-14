@@ -22,7 +22,7 @@ return [
         'action' => 'registerPage'
     ],
     '/register/success' => [
-        'controller' => $login,
+        'controller' => $account,
         'action' => 'registerSuccessPage'
     ],
     '/recovery' => [
