@@ -33,9 +33,11 @@ class GameController extends Controller
         if (isset($_POST['categories'])) {
             $categories = $_POST['categories'];
         }
-        $result = $this->model->getGames($search, $sort, $order, $categories);
+        $games = $this->model->getGames($search, $sort, $order, $categories);
+        $best = $this->model->getBestGames();
         $vars = [
-            'games' => $result
+            'games' => $games,
+            'best' => $best
         ];
         $page = new PageView('Main', 'main', $this->access, $vars);
         $page->renderPage();

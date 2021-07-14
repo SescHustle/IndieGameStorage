@@ -37,6 +37,11 @@ class GameModel extends Model
         return $this->db->selectAsArray($sql, $params);
     }
 
+    public function getBestGames(){
+        $sql = 'SELECT game.* FROM game ORDER BY (rating * downloads) LIMIT 5';
+        return $this->db->selectAsArray($sql);
+    }
+
     public function gameExists($gameid)
     {
         $params = [

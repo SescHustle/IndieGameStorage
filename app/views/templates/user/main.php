@@ -22,7 +22,7 @@ use app\views\FormView;
             <h1 class="text-center">Best Games</h1>
             <div class="row justify-content-around mt-3 mb-3">
                 <?php
-                foreach ($games as $game) {
+                foreach ($best as $game) {
                     BlockView::renderGameCard($game);
                 } ?>
             </div>
